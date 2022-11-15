@@ -5,3 +5,20 @@
 [![Release](https://img.shields.io/badge/Release-0.1.0-blue.svg)](https://github.com/aaric/golang-achieve/releases)
 
 > GO Lang Learning.
+
+## 1 fyne v2
+
+|No.|Env Key|Pkg Path|Remark|
+|:---:|:---:|-----|-----|
+|1|`GOPATH`|`~/go`|*Default*|
+|2|`GOPATH`|`/path/to/go`| |
+
+&emsp;&emsp;*Download to `$GOPATH/pkg/mod/fyne.io`.*
+
+```bash
+# removes unused dependencies
+go mod tidy
+
+# go clean -i -n fyne.io/fyne/v2
+go get -u fyne.io/fyne/v2
+```
