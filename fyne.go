@@ -21,17 +21,17 @@ func main() {
 	myWindow.SetMaster()
 
 	// hello world
-	//myWindow.SetContent(widget.NewLabel("This is some content."))
+	/*myWindow.SetContent(widget.NewLabel("This is some content."))*/
 
 	// clock
-	//clock := widget.NewLabel("")
-	//updateTime(clock)
-	//myWindow.SetContent(clock)
-	//go func() {
-	//	for range time.Tick(time.Second) {
-	//		updateTime(clock)
-	//	}
-	//}()
+	/*clock := widget.NewLabel("")
+	updateTime(clock)
+	myWindow.SetContent(clock)
+	go func() {
+		for range time.Tick(time.Second) {
+			updateTime(clock)
+		}
+	}()*/
 
 	// open window
 	myWindow.SetContent(widget.NewButton("Open Window", func() {
