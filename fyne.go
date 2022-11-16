@@ -18,13 +18,13 @@ func main() {
 
 	clock := widget.NewLabel("")
 	updateTime(clock)
+	//myWindow.SetContent(widget.NewLabel("This is some content."))
+	myWindow.SetContent(clock)
 	go func() {
 		for range time.Tick(time.Second) {
 			updateTime(clock)
 		}
 	}()
-	//myWindow.SetContent(widget.NewLabel("This is some content."))
-	myWindow.SetContent(clock)
 
 	myWindow.ShowAndRun()
 	tidyUp()
