@@ -12,7 +12,7 @@
 |:---:|:---:|-----|-----|
 |1|`GOPATH`|`~/go`|*default*|
 |2|`GOPATH`|`/path/to/go`| |
-|3|`PATH`|`$GOPATH/bin`|*install binary*|
+|3|`PATH`|`$PATH:$GOPATH/bin`|*install binary*|
 
 &emsp;&emsp;*Download to `$GOPATH/pkg/mod/fyne.io`.*
 
