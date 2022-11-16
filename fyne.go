@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/widget"
 	"time"
@@ -26,7 +27,16 @@ func main() {
 		}
 	}()
 
-	myWindow.ShowAndRun()
+	myWindow.Resize(fyne.NewSize(400, 300))
+	//myWindow.ShowAndRun()
+	myWindow.Show()
+	myWindow.SetMaster()
+
+	w2 := myApp.NewWindow("Window 2")
+	w2.SetContent(widget.NewLabel("This is other windows."))
+	w2.Show()
+
+	myApp.Run()
 	tidyUp()
 }
 
