@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// clock
 func updateTime(clock *widget.Label) {
 	formatted := time.Now().Format("Time: 03:04:05")
 	clock.SetText(formatted)
