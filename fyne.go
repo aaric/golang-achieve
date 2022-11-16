@@ -5,6 +5,8 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 	"image/color"
 	"time"
@@ -18,7 +20,7 @@ func updateTime(clock *widget.Label) {
 
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Clock")
+	myWindow := myApp.NewWindow("Demo")
 	myWindow.Resize(fyne.NewSize(400, 300))
 	myWindow.SetMaster()
 
@@ -71,7 +73,15 @@ func main() {
 
 	text := canvas.NewText("hello world", color.Black)
 	text.TextStyle.Bold = true
-	myCanvas.SetContent(text)
+
+	//content := container.NewWithoutLayout(rect, circle, text)
+	content := container.New(layout.NewVBoxLayout(), rect, circle, text)
+	myCanvas.SetContent(content)
+
+	// layout | https://developer.fyne.io/explore/layouts
+
+	// widget | https://developer.fyne.io/explore/widgets
+	//myWindow.SetContent(widget.NewEntry())
 
 	//myWindow.ShowAndRun()
 	myWindow.Show()
