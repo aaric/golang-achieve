@@ -19,16 +19,20 @@ func main() {
 	myWindow.Resize(fyne.NewSize(400, 300))
 	myWindow.SetMaster()
 
-	/*clock := widget.NewLabel("")
-	updateTime(clock)
+	// hello world
 	//myWindow.SetContent(widget.NewLabel("This is some content."))
-	myWindow.SetContent(clock)
-	go func() {
-		for range time.Tick(time.Second) {
-			updateTime(clock)
-		}
-	}()*/
 
+	// clock
+	//clock := widget.NewLabel("")
+	//updateTime(clock)
+	//myWindow.SetContent(clock)
+	//go func() {
+	//	for range time.Tick(time.Second) {
+	//		updateTime(clock)
+	//	}
+	//}()
+
+	// open window
 	myWindow.SetContent(widget.NewButton("Open Window", func() {
 		w2 := myApp.NewWindow("Window 2")
 		w2.SetContent(widget.NewLabel("This is other windows."))
