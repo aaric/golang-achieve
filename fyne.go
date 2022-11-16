@@ -16,8 +16,10 @@ func updateTime(clock *widget.Label) {
 func main() {
 	myApp := app.New()
 	myWindow := myApp.NewWindow("Clock")
+	myWindow.Resize(fyne.NewSize(400, 300))
+	myWindow.SetMaster()
 
-	clock := widget.NewLabel("")
+	/*clock := widget.NewLabel("")
 	updateTime(clock)
 	//myWindow.SetContent(widget.NewLabel("This is some content."))
 	myWindow.SetContent(clock)
@@ -25,16 +27,16 @@ func main() {
 		for range time.Tick(time.Second) {
 			updateTime(clock)
 		}
-	}()
+	}()*/
 
-	myWindow.Resize(fyne.NewSize(400, 300))
+	myWindow.SetContent(widget.NewButton("Open Window", func() {
+		w2 := myApp.NewWindow("Window 2")
+		w2.SetContent(widget.NewLabel("This is other windows."))
+		w2.Show()
+	}))
+
 	//myWindow.ShowAndRun()
 	myWindow.Show()
-	myWindow.SetMaster()
-
-	w2 := myApp.NewWindow("Window 2")
-	w2.SetContent(widget.NewLabel("This is other windows."))
-	w2.Show()
 
 	myApp.Run()
 	tidyUp()
