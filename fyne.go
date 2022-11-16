@@ -51,7 +51,6 @@ func main() {
 		A: 255,
 	}
 	rect := canvas.NewRectangle(blue)
-	myCanvas.SetContent(rect)
 	go func() {
 		time.Sleep(time.Second)
 		green := color.NRGBA{
@@ -63,6 +62,16 @@ func main() {
 		rect.FillColor = green
 		rect.Refresh()
 	}()
+	myCanvas.SetContent(rect)
+
+	circle := canvas.NewCircle(blue)
+	circle.StrokeWidth = 4
+	circle.StrokeColor = blue
+	myCanvas.SetContent(circle)
+
+	text := canvas.NewText("hello world", color.Black)
+	text.TextStyle.Bold = true
+	myCanvas.SetContent(text)
 
 	//myWindow.ShowAndRun()
 	myWindow.Show()
