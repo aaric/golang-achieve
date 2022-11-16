@@ -7,7 +7,7 @@ import (
 
 // Go Snippets
 // https://goproxy.io/zh/
-func main() {
+/*func main() {
 	// 1. print
 	//print()
 
@@ -20,7 +20,7 @@ func main() {
 	// 4. functions
 	sum, muli := functions(1, 2)
 	fmt.Println(sum, muli)
-}
+}*/
 
 func print() {
 	time.Sleep(3 * time.Second)

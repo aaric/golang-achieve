@@ -10,15 +10,28 @@
 
 |No.|Env Key|Pkg Path|Remark|
 |:---:|:---:|-----|-----|
-|1|`GOPATH`|`~/go`|*Default*|
+|1|`GOPATH`|`~/go`|*default*|
 |2|`GOPATH`|`/path/to/go`| |
+|3|`PATH`|`$GOPATH/bin`|*install binary*|
 
 &emsp;&emsp;*Download to `$GOPATH/pkg/mod/fyne.io`.*
 
 ```bash
-# removes unused dependencies
-go mod tidy
+# init
+#go mod init
 
+# download
 # go clean -i -n fyne.io/fyne/v2
 go get -u fyne.io/fyne/v2
+
+# tidy
+go mod tidy
+
+# run
+go run fyne.go
+
+# package
+go install fyne.io/fyne/v2/cmd/fyne@latest
+#fyne package --name fyne --icon Icon.png --appVersion 0.1.0 fyne.go
+fyne package --name fyne --appVersion 0.1.0 fyne.go
 ```
