@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/driver/desktop"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 	"time"
 )
@@ -92,7 +92,7 @@ func main() {
 	myWindow.SetContent(container.NewVBox(makeUI()))*/
 
 	// system tray
-	myWindow := myApp.NewWindow("System Tray")
+	/*myWindow := myApp.NewWindow("System Tray")
 
 	if desktopApp, ok := myApp.(desktop.App); ok {
 		myTrayMenu := fyne.NewMenu("Tray Menu",
@@ -106,9 +106,21 @@ func main() {
 	myWindow.SetCloseIntercept(func() {
 		myWindow.Hide()
 	})
-	myWindow.SetContent(widget.NewLabel("This is system tray."))
+	myWindow.SetContent(widget.NewLabel("This is system tray."))*/
 
 	// layout | https://developer.fyne.io/explore/layouts
+	myWindow := myApp.NewWindow("Layout")
+	myWindow.SetContent(container.NewBorder(
+		container.NewHBox(widget.NewLabel("top1"), widget.NewLabel("top2")),
+		container.NewCenter(widget.NewLabel("bottom")),
+		container.NewVBox(widget.NewLabel("left1"), widget.NewLabel("left2")),
+		widget.NewLabel("right"),
+		container.NewGridWithColumns(2,
+			widget.NewLabel("go1"),
+			widget.NewLabel("go2"),
+			widget.NewLabel("go3"),
+		),
+	))
 
 	// widget | https://developer.fyne.io/explore/widgets
 	//myWindow.SetContent(widget.NewEntry())
