@@ -17,8 +17,13 @@ func updateTime(clock *widget.Label) {
 
 // test ui
 func makeUI() (*widget.Label, *widget.Entry) {
-	return widget.NewLabel("hello world"),
-		widget.NewEntry()
+	label := widget.NewLabel("Hello World")
+	entry := widget.NewEntry()
+
+	entry.OnChanged = func(content string) {
+		label.SetText("Hello " + content)
+	}
+	return label, entry
 }
 
 func main() {

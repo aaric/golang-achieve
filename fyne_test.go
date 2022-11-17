@@ -1,10 +1,18 @@
 package main
 
-import "testing"
+import (
+	"fyne.io/fyne/v2/test"
+	"testing"
+)
 
 func TestMakeUI(t *testing.T) {
-	l, _ := makeUI()
-	if l.Text != "hello world" {
+	label, entry := makeUI()
+	if label.Text != "Hello World" {
 		t.Error("Incorrect label text")
+	}
+
+	test.Type(entry, "Aaric")
+	if label.Text != "Hello Aaric" {
+		t.Error("Incorrect entry input")
 	}
 }
