@@ -4,11 +4,8 @@ import (
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
-	"image/color"
 	"time"
 )
 
@@ -18,17 +15,27 @@ func updateTime(clock *widget.Label) {
 	clock.SetText(formatted)
 }
 
+// test ui
+func makeUI() (*widget.Label, *widget.Entry) {
+	label := widget.NewLabel("Hello World")
+	entry := widget.NewEntry()
+
+	entry.OnChanged = func(content string) {
+		label.SetText("Hello " + content)
+	}
+	return label, entry
+}
+
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Demo")
-	myWindow.Resize(fyne.NewSize(400, 300))
-	myWindow.SetMaster()
 
 	// hello world
-	/*myWindow.SetContent(widget.NewLabel("This is some content."))*/
+	/*myWindow := myApp.NewWindow("Hello World")
+	myWindow.SetContent(widget.NewLabel("This is some content."))*/
 
 	// clock
-	/*clock := widget.NewLabel("")
+	/*myWindow := myApp.NewWindow("Clock")
+	clock := widget.NewLabel("")
 	updateTime(clock)
 	myWindow.SetContent(clock)
 	go func() {
@@ -38,13 +45,15 @@ func main() {
 	}()*/
 
 	// open window
-	/*myWindow.SetContent(widget.NewButton("Open Window", func() {
+	/*myWindow := myApp.NewWindow("New Window")
+	myWindow.SetContent(widget.NewButton("Open Window", func() {
 		w2 := myApp.NewWindow("Window 2")
 		w2.SetContent(widget.NewLabel("This is other windows."))
 		w2.Show()
 	}))*/
 
 	// canvas
+	/*myWindow := myApp.NewWindow("Canvas")
 	myCanvas := myWindow.Canvas()
 	blue := color.NRGBA{
 		R: 0,
@@ -76,13 +85,19 @@ func main() {
 
 	//content := container.NewWithoutLayout(rect, circle, text)
 	content := container.New(layout.NewVBoxLayout(), rect, circle, text)
-	myCanvas.SetContent(content)
+	myCanvas.SetContent(content)*/
+
+	// test ui
+	myWindow := myApp.NewWindow("Test App")
+	myWindow.SetContent(container.NewVBox(makeUI()))
 
 	// layout | https://developer.fyne.io/explore/layouts
 
 	// widget | https://developer.fyne.io/explore/widgets
 	//myWindow.SetContent(widget.NewEntry())
 
+	myWindow.Resize(fyne.NewSize(400, 300))
+	myWindow.SetMaster()
 	//myWindow.ShowAndRun()
 	myWindow.Show()
 
