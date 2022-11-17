@@ -15,6 +15,12 @@ func updateTime(clock *widget.Label) {
 	clock.SetText(formatted)
 }
 
+// test ui
+func makeUI() (*widget.Label, *widget.Entry) {
+	return widget.NewLabel("hello world"),
+		widget.NewEntry()
+}
+
 func main() {
 	myApp := app.New()
 
@@ -76,12 +82,9 @@ func main() {
 	content := container.New(layout.NewVBoxLayout(), rect, circle, text)
 	myCanvas.SetContent(content)*/
 
-	// test
+	// test ui
 	myWindow := myApp.NewWindow("Test App")
-	myWindow.SetContent(container.NewVBox(
-		widget.NewLabel("hello world"),
-		widget.NewEntry(),
-	))
+	myWindow.SetContent(container.NewVBox(makeUI()))
 
 	// layout | https://developer.fyne.io/explore/layouts
 
