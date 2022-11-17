@@ -5,10 +5,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
-	"log"
-	"net/url"
 	"time"
 )
 
@@ -126,7 +123,7 @@ func main() {
 	))*/
 
 	// widget | https://developer.fyne.io/api/v2.2/widget/
-	myWindow := myApp.NewWindow("Widget")
+	/*myWindow := myApp.NewWindow("Widget")
 	url, _ := url.Parse("https://www.baidu.com")
 	path, _ := fyne.LoadResourceFromPath("./Icon.png")
 	myWindow.SetContent(container.NewVScroll(container.NewVBox(
@@ -177,7 +174,14 @@ func main() {
 			container.NewTabItem("tab1", widget.NewLabel("tab1 content")),
 			container.NewTabItem("tab2", widget.NewLabel("tab2 content")),
 		),
-	)))
+	)))*/
+
+	// split
+	myWindow := myApp.NewWindow("Split")
+	myWindow.SetContent(container.NewVSplit(container.NewHSplit(
+		widget.NewLabel("go1"),
+		widget.NewLabel("go2"),
+	), widget.NewLabel("go3")))
 
 	myWindow.Resize(fyne.NewSize(400, 300))
 	myWindow.SetMaster()
