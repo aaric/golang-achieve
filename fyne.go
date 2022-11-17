@@ -5,7 +5,10 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+	"log"
+	"net/url"
 	"time"
 )
 
@@ -109,7 +112,7 @@ func main() {
 	myWindow.SetContent(widget.NewLabel("This is system tray."))*/
 
 	// layout | https://developer.fyne.io/explore/layouts
-	myWindow := myApp.NewWindow("Layout")
+	/*myWindow := myApp.NewWindow("Layout")
 	myWindow.SetContent(container.NewBorder(
 		container.NewHBox(widget.NewLabel("top1"), widget.NewLabel("top2")),
 		container.NewCenter(widget.NewLabel("bottom")),
@@ -120,10 +123,61 @@ func main() {
 			widget.NewLabel("go2"),
 			widget.NewLabel("go3"),
 		),
-	))
+	))*/
 
-	// widget | https://developer.fyne.io/explore/widgets
-	//myWindow.SetContent(widget.NewEntry())
+	// widget | https://developer.fyne.io/api/v2.2/widget/
+	myWindow := myApp.NewWindow("Widget")
+	url, _ := url.Parse("https://www.baidu.com")
+	path, _ := fyne.LoadResourceFromPath("./Icon.png")
+	myWindow.SetContent(container.NewVScroll(container.NewVBox(
+		widget.NewAccordion(widget.NewAccordionItem("Accordion", widget.NewLabel("hello world"))),
+		widget.NewButton("Button", func() {
+			log.Println("hello", "world")
+		}),
+		widget.NewCard("Card", "this is a card", widget.NewIcon(theme.AccountIcon())),
+		widget.NewCheck("Check", func(b bool) {
+			log.Println("checkbox", "clicked")
+		}),
+		widget.NewEntry(),
+		widget.NewPasswordEntry(),
+		//widget.NewFileIcon(fyne.URI()),
+		widget.NewForm(
+			widget.NewFormItem("Username", widget.NewEntry()),
+			widget.NewFormItem("Password", widget.NewPasswordEntry()),
+		),
+		widget.NewHyperlink("www.baidu.com", url),
+		widget.NewIcon(path),
+		widget.NewProgressBar(),
+		widget.NewRadioGroup([]string{"go1", "go2"}, func(selected string) {
+			log.Println(selected)
+		}),
+		widget.NewSelect([]string{"go1", "go2"}, func(selected string) {
+			log.Println(selected)
+		}),
+		widget.NewSeparator(),
+		widget.NewSlider(0, 100),
+		widget.NewToolbar(
+			widget.NewToolbarAction(theme.ContentCutIcon(), func() {
+				log.Println("cut")
+			}),
+			widget.NewToolbarSeparator(),
+			widget.NewToolbarAction(theme.ContentCopyIcon(), func() {
+				log.Println("copied")
+			}),
+			widget.NewToolbarAction(theme.ContentPasteIcon(), func() {
+				log.Println("pasted")
+			}),
+			widget.NewToolbarSpacer(),
+			widget.NewToolbarAction(theme.HelpIcon(), func() {
+				log.Println("helped")
+			}),
+		),
+		widget.NewMultiLineEntry(),
+		container.NewAppTabs(
+			container.NewTabItem("tab1", widget.NewLabel("tab1 content")),
+			container.NewTabItem("tab2", widget.NewLabel("tab2 content")),
+		),
+	)))
 
 	myWindow.Resize(fyne.NewSize(400, 300))
 	myWindow.SetMaster()
