@@ -4,11 +4,8 @@ import (
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
-	"image/color"
 	"time"
 )
 
@@ -20,15 +17,14 @@ func updateTime(clock *widget.Label) {
 
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Demo")
-	myWindow.Resize(fyne.NewSize(400, 300))
-	myWindow.SetMaster()
 
 	// hello world
-	/*myWindow.SetContent(widget.NewLabel("This is some content."))*/
+	/*myWindow := myApp.NewWindow("Hello World")
+	myWindow.SetContent(widget.NewLabel("This is some content."))*/
 
 	// clock
-	/*clock := widget.NewLabel("")
+	/*myWindow := myApp.NewWindow("Clock")
+	clock := widget.NewLabel("")
 	updateTime(clock)
 	myWindow.SetContent(clock)
 	go func() {
@@ -38,13 +34,15 @@ func main() {
 	}()*/
 
 	// open window
-	/*myWindow.SetContent(widget.NewButton("Open Window", func() {
+	/*myWindow := myApp.NewWindow("New Window")
+	myWindow.SetContent(widget.NewButton("Open Window", func() {
 		w2 := myApp.NewWindow("Window 2")
 		w2.SetContent(widget.NewLabel("This is other windows."))
 		w2.Show()
 	}))*/
 
 	// canvas
+	/*myWindow := myApp.NewWindow("Canvas")
 	myCanvas := myWindow.Canvas()
 	blue := color.NRGBA{
 		R: 0,
@@ -76,13 +74,22 @@ func main() {
 
 	//content := container.NewWithoutLayout(rect, circle, text)
 	content := container.New(layout.NewVBoxLayout(), rect, circle, text)
-	myCanvas.SetContent(content)
+	myCanvas.SetContent(content)*/
+
+	// test
+	myWindow := myApp.NewWindow("Test App")
+	myWindow.SetContent(container.NewVBox(
+		widget.NewLabel("hello world"),
+		widget.NewEntry(),
+	))
 
 	// layout | https://developer.fyne.io/explore/layouts
 
 	// widget | https://developer.fyne.io/explore/widgets
 	//myWindow.SetContent(widget.NewEntry())
 
+	myWindow.Resize(fyne.NewSize(400, 300))
+	myWindow.SetMaster()
 	//myWindow.ShowAndRun()
 	myWindow.Show()
 
