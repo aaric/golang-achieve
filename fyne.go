@@ -5,6 +5,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 	"time"
 )
@@ -176,12 +177,16 @@ func main() {
 		),
 	)))*/
 
-	// split
-	myWindow := myApp.NewWindow("Split")
+	// theme
+	myWindow := myApp.NewWindow("Theme")
 	myWindow.SetContent(container.NewVSplit(container.NewHSplit(
-		widget.NewLabel("go1"),
-		widget.NewLabel("go2"),
-	), widget.NewLabel("go3")))
+		widget.NewButton("DarkTheme", func() {
+			myApp.Settings().SetTheme(theme.DarkTheme())
+		}),
+		widget.NewButton("LightTheme", func() {
+			myApp.Settings().SetTheme(theme.LightTheme())
+		}),
+	), widget.NewLabel("This is switch theme demo.")))
 
 	myWindow.Resize(fyne.NewSize(400, 300))
 	myWindow.SetMaster()
