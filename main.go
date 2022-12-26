@@ -2,8 +2,8 @@ package main
 
 func main() {
 	// lang
-	main1("json")
+	//main1("json")
 
 	// fyne
-	//main2()
+	main2("themeApp")
 }
