@@ -27,7 +27,7 @@ func makeUI() (*widget.Label, *widget.Entry) {
 	return label, entry
 }
 
-func main() {
+func main2() {
 	myApp := app.New()
 
 	// hello world

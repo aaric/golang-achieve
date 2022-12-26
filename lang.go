@@ -8,22 +8,27 @@ import (
 
 // Go Snippets
 // https://goproxy.io/zh/
-func main() {
-	// 1. print
-	//print()
-
-	// 2. types
-	//types()
-
-	// 3. consts
-	//consts()
-
-	// 4. functions
-	//sum, muli := functions(1, 2)
-	//fmt.Println(sum, muli)
-
-	// 5. json
-	json2str()
+func main1(fun string) {
+	switch fun {
+	case "print":
+		// 1. print
+		print()
+	case "types":
+		// 2. types
+		types()
+	case "consts":
+		// 3. consts
+		consts()
+	case "functions":
+		// 4. functions
+		sum, muli := functions(1, 2)
+		fmt.Println(sum, muli)
+	case "json":
+		// 5. json
+		json2str()
+	default:
+		fmt.Println("not match")
+	}
 }
 
 func print() {
