@@ -1,13 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"time"
 )
 
 // Go Snippets
 // https://goproxy.io/zh/
-/*func main() {
+func main() {
 	// 1. print
 	//print()
 
@@ -18,9 +19,12 @@ import (
 	//consts()
 
 	// 4. functions
-	sum, muli := functions(1, 2)
-	fmt.Println(sum, muli)
-}*/
+	//sum, muli := functions(1, 2)
+	//fmt.Println(sum, muli)
+
+	// 5. json
+	json2str()
+}
 
 func print() {
 	time.Sleep(3 * time.Second)
@@ -52,4 +56,28 @@ func consts() {
 
 func functions(a int, b int) (int, int) {
 	return a + b, a * b
+}
+
+type datetime = int64
+
+type Person struct {
+	Name     string   `json:"name"`
+	Age      int      `json:"age"`
+	Birthday datetime `json:"-"`
+}
+
+func json2str() {
+	p1 := Person{"Aaric", 18, 1668744000000}
+	bts, err := json.Marshal(p1)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(bts))
+
+	var p2 Person
+	dat := []byte(`{"Name":"Aaric","Age":18,"Birthday":1668744000000}`)
+	if err := json.Unmarshal(dat, &p2); err != nil {
+		panic(err)
+	}
+	fmt.Println(p2.Name, p2.Age, p2.Birthday)
 }
