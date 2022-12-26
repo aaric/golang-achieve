@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math/big"
 	"time"
 )
 
@@ -26,6 +27,8 @@ func main1(fun string) {
 	case "jsonLang":
 		// 5. json
 		jsonLang()
+	case "bigLang":
+		bigLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -85,4 +88,12 @@ func jsonLang() {
 		panic(err)
 	}
 	fmt.Println(p2.Name, p2.Age, p2.Birthday)
+}
+
+func bigLang() {
+	m := new(big.Int)
+	m.SetInt64(1000000000000000)
+	n := new(big.Int)
+	n.SetString("2000000000000000", 10)
+	fmt.Println(m.Add(m, n))
 }
