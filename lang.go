@@ -10,33 +10,33 @@ import (
 // https://goproxy.io/zh/
 func main1(fun string) {
 	switch fun {
-	case "print":
+	case "printLang":
 		// 1. print
-		print()
-	case "types":
+		printLang()
+	case "typeLang":
 		// 2. types
-		types()
-	case "consts":
+		typeLang()
+	case "constLang":
 		// 3. consts
-		consts()
-	case "functions":
+		constLang()
+	case "functionLang":
 		// 4. functions
-		sum, muli := functions(1, 2)
+		sum, muli := functionLang(1, 2)
 		fmt.Println(sum, muli)
-	case "json":
+	case "jsonLang":
 		// 5. json
-		json2str()
+		jsonLang()
 	default:
 		fmt.Println("not match")
 	}
 }
 
-func print() {
+func printLang() {
 	time.Sleep(3 * time.Second)
 	fmt.Println("hello go")
 }
 
-func types() {
+func typeLang() {
 	var a int
 	var b1, b2 int = 10, 20
 	var (
@@ -47,7 +47,7 @@ func types() {
 	fmt.Printf("%d %d %d %d %t %T\n", a, b1, b2, c1, c2, d)
 }
 
-func consts() {
+func constLang() {
 	const PI = 3.14
 	fmt.Println(PI)
 
@@ -59,7 +59,7 @@ func consts() {
 	fmt.Println(C, GO, JAVA)
 }
 
-func functions(a int, b int) (int, int) {
+func functionLang(a int, b int) (int, int) {
 	return a + b, a * b
 }
 
@@ -71,7 +71,7 @@ type Person struct {
 	Birthday datetime `json:"-"`
 }
 
-func json2str() {
+func jsonLang() {
 	p1 := Person{"Aaric", 18, 1668744000000}
 	bts, err := json.Marshal(p1)
 	if err != nil {
