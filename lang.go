@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/big"
+	"strconv"
 	"time"
+	"unicode/utf8"
 )
 
 // Go Snippets
@@ -28,7 +30,11 @@ func main1(fun string) {
 		// 5. json
 		jsonLang()
 	case "bigLang":
+		// 6. big number
 		bigLang()
+	case "stringLang":
+		// 7. string
+		stringLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -91,9 +97,40 @@ func jsonLang() {
 }
 
 func bigLang() {
-	m := new(big.Int)
-	m.SetInt64(1000000000000000)
+	m := big.NewInt(3e15)
 	n := new(big.Int)
 	n.SetString("2000000000000000", 10)
-	fmt.Println(m.Add(m, n))
+
+	result := new(big.Int)
+	result.Add(m, n)
+	fmt.Println(result)
+}
+
+func stringLang() {
+	fmt.Println("hello \t go")
+	fmt.Println(`hello \t go`)
+	fmt.Println(`
+Dear all:
+  Happy New Year!`)
+
+	var pi rune = 960
+	var alpha rune = 940
+	var omega rune = 963
+	var bang rune = 33
+	fmt.Printf("%v %v %v %v\n", pi, alpha, omega, bang)
+	fmt.Printf("%c %c %c %c\n", pi, alpha, omega, bang)
+	fmt.Println(string(pi), string(alpha), string(omega), string(bang))
+
+	msg := "πάσ is chars!"
+	fmt.Println(len(msg), "bytes")
+	fmt.Println(utf8.RuneCountInString(msg), "runes")
+	c, size := utf8.DecodeRuneInString(msg)
+	fmt.Printf("%c is %v bytes\n", c, size)
+	for i, c := range msg {
+		fmt.Printf("%v %c\n", i, c)
+	}
+
+	countdown := 10
+	str := "Using " + strconv.Itoa(countdown) + " seconds, status is " + fmt.Sprintf("%v", true)
+	fmt.Println(str)
 }
