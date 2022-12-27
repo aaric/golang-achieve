@@ -91,9 +91,11 @@ func jsonLang() {
 }
 
 func bigLang() {
-	m := new(big.Int)
-	m.SetInt64(1000000000000000)
+	m := big.NewInt(3e15)
 	n := new(big.Int)
 	n.SetString("2000000000000000", 10)
-	fmt.Println(m.Add(m, n))
+
+	result := new(big.Int)
+	result.Add(m, n)
+	fmt.Println(result)
 }
