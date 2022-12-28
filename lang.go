@@ -26,14 +26,17 @@ func main1(fun string) {
 		// 4. functions
 		sum, muli := functionLang(1, 2)
 		fmt.Println(sum, muli)
+	case "methodLang":
+		// 5. method
+		methodLang()
 	case "jsonLang":
-		// 5. json
+		// 6. json
 		jsonLang()
 	case "bigLang":
-		// 6. big number
+		// 7. big number
 		bigLang()
 	case "stringLang":
-		// 7. string
+		// 8. string
 		stringLang()
 	default:
 		fmt.Println("not match")
@@ -70,6 +73,31 @@ func constLang() {
 
 func functionLang(a int, b int) (int, int) {
 	return a + b, a * b
+}
+
+type celsius float64
+type kelvin float64
+
+func kelvinToCelsius(k kelvin) celsius {
+	return celsius(k - 273.15)
+}
+
+func (k kelvin) celsius() celsius {
+	return celsius(k - 273.15)
+}
+
+var k2c = func(k kelvin) celsius {
+	return celsius(k - 273.15)
+}
+
+func methodLang() {
+	var k kelvin = 100
+	fmt.Println(kelvinToCelsius(k))
+	fmt.Println(k.celsius())
+	fmt.Println(k2c(k))
+	func() {
+		fmt.Println(celsius(k - 273.15))
+	}()
 }
 
 type datetime = int64
