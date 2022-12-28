@@ -6,7 +6,7 @@
 
 > GO Lang Learning.
 
-## 1 fyne v2
+## 1 lang
 
 |No.|Env Key|Pkg Path|Remark|
 |:---:|:---:|-----|-----|
@@ -14,7 +14,17 @@
 |2|`GOPATH`|`/path/to/go`| |
 |3|`PATH`|`$PATH:$GOPATH/bin`|*install binary*|
 
-&emsp;&emsp;*Download to `$GOPATH/pkg/mod/fyne.io`.*
+```bash
+# default -> on
+go env -w GO111MODULE=on
+
+# default -> https://proxy.golang.org
+go env -w GOPROXY=https://goproxy.cn,direct
+```
+
+## 2 fyne v2
+
+> *Download to `$GOPATH/pkg/mod/fyne.io`.*
 
 ```bash
 # init

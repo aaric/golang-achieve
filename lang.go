@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/big"
+	"sort"
 	"strconv"
+	"strings"
 	"time"
 	"unicode/utf8"
 )
@@ -26,15 +28,21 @@ func main1(fun string) {
 		// 4. functions
 		sum, muli := functionLang(1, 2)
 		fmt.Println(sum, muli)
+	case "methodLang":
+		// 5. method
+		methodLang()
 	case "jsonLang":
-		// 5. json
+		// 6. json
 		jsonLang()
 	case "bigLang":
-		// 6. big number
+		// 7. big number
 		bigLang()
 	case "stringLang":
-		// 7. string
+		// 8. string
 		stringLang()
+	case "arrayLang":
+		// 9. array
+		arrayLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -70,6 +78,31 @@ func constLang() {
 
 func functionLang(a int, b int) (int, int) {
 	return a + b, a * b
+}
+
+type celsius float64
+type kelvin float64
+
+func kelvinToCelsius(k kelvin) celsius {
+	return celsius(k - 273.15)
+}
+
+func (k kelvin) celsius() celsius {
+	return celsius(k - 273.15)
+}
+
+var k2c = func(k kelvin) celsius {
+	return celsius(k - 273.15)
+}
+
+func methodLang() {
+	var k kelvin = 100
+	fmt.Println(kelvinToCelsius(k))
+	fmt.Println(k.celsius())
+	fmt.Println(k2c(k))
+	func() {
+		fmt.Println(celsius(k - 273.15))
+	}()
 }
 
 type datetime = int64
@@ -133,4 +166,33 @@ Dear all:
 	countdown := 10
 	str := "Using " + strconv.Itoa(countdown) + " seconds, status is " + fmt.Sprintf("%v", true)
 	fmt.Println(str)
+}
+
+func arrayLang() {
+	p1 := [...]string{"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"}
+	fmt.Println(p1)
+	fmt.Println(p1[0:4], p1[4:6], p1[6:8])
+	fmt.Println(p1[:4], p1[4:6], p1[6:])
+
+	for i := 0; i < len(p1); i++ {
+		fmt.Println(p1[i])
+	}
+
+	p2 := []string{"    Mercury", "Venus    ", "    Earth    "}
+	for i, e := range p2 {
+		fmt.Printf("%v %v\n", i, strings.TrimSpace(e))
+	}
+	fmt.Println(strings.Join(p2, ","))
+
+	//p3 := sort.StringSlice{"Mercury", "Venus", "Earth"}
+	p3 := sort.StringSlice(p1[:])
+	p3.Sort()
+	fmt.Println(p3)
+
+	p4 := p1[3:6:8]
+	fmt.Printf("%v -> length=%v, capacity=%v\n", p4, len(p4), cap(p4))
+
+	p5 := make([]string, 0, 10)
+	p5 = append(p5, "Mars", "Jupiter", "Saturn")
+	fmt.Printf("%v -> length=%v, capacity=%v\n", p5, len(p5), cap(p5))
 }
