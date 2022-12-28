@@ -43,6 +43,9 @@ func main1(fun string) {
 	case "arrayLang":
 		// 9. array
 		arrayLang()
+	case "mapLang":
+		// 10. map
+		mapLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -195,4 +198,37 @@ func arrayLang() {
 	p5 := make([]string, 0, 10)
 	p5 = append(p5, "Mars", "Jupiter", "Saturn")
 	fmt.Printf("%v -> length=%v, capacity=%v\n", p5, len(p5), cap(p5))
+}
+
+func mapLang() {
+	virus := map[string]string{
+		"Alpha": "B.1.1.7",
+		"Beta":  "B.1.351",
+		"Gamma": "P.1",
+		"Delta": "B.1.617.2",
+	}
+	v1 := virus["Alpha"]
+	fmt.Println(v1)
+
+	virus["Alpha"] = "B.1.1.8"
+	virus["Omicron"] = "B.1.1529"
+	fmt.Println(virus)
+
+	zeta := virus["Zeta"]
+	fmt.Println(zeta)
+
+	if zeta, ok := virus["Zeta"]; ok {
+		fmt.Printf("Zeta is %v\n", zeta)
+	} else {
+		fmt.Printf("Zeta is nil\n")
+	}
+
+	covid19 := virus
+	covid19["Alpha"] = "B.1.1.9"
+	fmt.Println(virus)
+	fmt.Println(covid19)
+
+	delete(virus, "Alpha")
+	fmt.Println(virus)
+	fmt.Println(covid19)
 }
