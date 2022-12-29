@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"math/big"
 	"sort"
 	"strconv"
@@ -43,6 +44,9 @@ func main1(fun string) {
 	case "arrayLang":
 		// 9. array
 		arrayLang()
+	case "mapLang":
+		// 10. map
+		mapLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -195,4 +199,66 @@ func arrayLang() {
 	p5 := make([]string, 0, 10)
 	p5 = append(p5, "Mars", "Jupiter", "Saturn")
 	fmt.Printf("%v -> length=%v, capacity=%v\n", p5, len(p5), cap(p5))
+}
+
+func mapLang() {
+	virus := map[string]string{
+		"Alpha": "B.1.1.7",
+		"Beta":  "B.1.351",
+		"Gamma": "P.1",
+		"Delta": "B.1.617.2",
+	}
+	v1 := virus["Alpha"]
+	fmt.Println(v1)
+
+	virus["Alpha"] = "B.1.1.8"
+	virus["Omicron"] = "B.1.1529"
+	fmt.Println(virus)
+
+	zeta := virus["Zeta"]
+	fmt.Println(zeta)
+
+	if zeta, ok := virus["Zeta"]; ok {
+		fmt.Printf("Zeta is %v\n", zeta)
+	} else {
+		fmt.Printf("Zeta is nil\n")
+	}
+
+	covid19 := virus
+	covid19["Alpha"] = "B.1.1.9"
+	fmt.Println(virus)
+	fmt.Println(covid19)
+
+	delete(virus, "Alpha")
+	fmt.Println(virus)
+	fmt.Println(covid19)
+
+	temps := []float64{
+		-5.0, 18.0, 15.0, -5.0, 15.0, 10.0, -5.0,
+	}
+
+	counters := make(map[float64]int, 8)
+	for _, e := range temps {
+		counters[e]++
+	}
+	for k, v := range counters {
+		fmt.Printf("%+.2f has %v times\n", k, v)
+	}
+
+	groups := make(map[float64][]float64)
+	for _, e := range temps {
+		g := math.Trunc(e/10) * 10
+		groups[g] = append(groups[g], e)
+	}
+	for k, v := range groups {
+		fmt.Printf("%v contians %v\n", k, v)
+	}
+
+	flags := make(map[float64]bool)
+	for _, e := range temps {
+		flags[e] = true
+	}
+	if flags[-5.0] {
+		fmt.Println("it has -5.0 item")
+	}
 }
