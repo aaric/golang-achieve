@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"math/big"
 	"sort"
 	"strconv"
@@ -231,4 +232,33 @@ func mapLang() {
 	delete(virus, "Alpha")
 	fmt.Println(virus)
 	fmt.Println(covid19)
+
+	temps := []float64{
+		-5.0, 18.0, 15.0, -5.0, 15.0, 10.0, -5.0,
+	}
+
+	counters := make(map[float64]int, 8)
+	for _, e := range temps {
+		counters[e]++
+	}
+	for k, v := range counters {
+		fmt.Printf("%+.2f has %v times\n", k, v)
+	}
+
+	groups := make(map[float64][]float64)
+	for _, e := range temps {
+		g := math.Trunc(e/10) * 10
+		groups[g] = append(groups[g], e)
+	}
+	for k, v := range groups {
+		fmt.Printf("%v contians %v\n", k, v)
+	}
+
+	flags := make(map[float64]bool)
+	for _, e := range temps {
+		flags[e] = true
+	}
+	if flags[-5.0] {
+		fmt.Println("it has -5.0 item")
+	}
 }
