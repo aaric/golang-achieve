@@ -111,15 +111,16 @@ func methodLang() {
 
 type datetime = int64
 
-type Person struct {
-	Name     string   `json:name`
-	Age      int      `json:age`
-	Birthday datetime `json:-`
+type wgs84 struct {
+	//latitude  float64
+	//longitude float64
+	latitude, longitude float64
 }
 
-type wgs84 struct {
-	latitude  float64
-	longitude float64
+type Person struct {
+	Name     string   `json:"name"`
+	Age      int      `json:"age"`
+	Birthday datetime `json:"-"`
 }
 
 func structLang() {
@@ -128,10 +129,16 @@ func structLang() {
 	//	longitude float64
 	//}
 
-	var point wgs84
-	point.latitude = 30.4
-	point.longitude = 114.4
-	fmt.Printf("%+v\n", point)
+	var w1 wgs84
+	w1.latitude = 30.4
+	w1.longitude = 114.4
+	//w2 := wgs84{30.4, 114.4}
+	w2 := wgs84{latitude: 30.4, longitude: 114.4}
+	w3 := w2
+	w3.longitude += 0.1
+	fmt.Printf("%v\n", w1)
+	fmt.Printf("%+v\n", w2)
+	fmt.Printf("%+v\n", w3)
 
 	p1 := Person{"Aaric", 18, 1668744000000}
 	bts, err := json.Marshal(p1)
@@ -141,11 +148,11 @@ func structLang() {
 	fmt.Println(string(bts))
 
 	var p2 Person
-	dat := []byte(`{"Name":"Aaric","Age":18,"Birthday":1668744000000}`)
+	dat := []byte(`{"name":"Aaric","age":18,"birthday":1668744000000}`)
 	if err := json.Unmarshal(dat, &p2); err != nil {
 		panic(err)
 	}
-	fmt.Println(p2.Name, p2.Age, p2.Birthday)
+	fmt.Printf("%+v", p2)
 }
 
 func bigLang() {
