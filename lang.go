@@ -32,9 +32,9 @@ func main1(fun string) {
 	case "methodLang":
 		// 5. method
 		methodLang()
-	case "jsonLang":
-		// 6. json
-		jsonLang()
+	case "structLang":
+		// 6. struct
+		structLang()
 	case "bigLang":
 		// 7. big number
 		bigLang()
@@ -112,12 +112,27 @@ func methodLang() {
 type datetime = int64
 
 type Person struct {
-	Name     string   `json:"name"`
-	Age      int      `json:"age"`
-	Birthday datetime `json:"-"`
+	Name     string   `json:name`
+	Age      int      `json:age`
+	Birthday datetime `json:-`
 }
 
-func jsonLang() {
+type wgs84 struct {
+	latitude  float64
+	longitude float64
+}
+
+func structLang() {
+	//var point struct {
+	//	latitude  float64
+	//	longitude float64
+	//}
+
+	var point wgs84
+	point.latitude = 30.4
+	point.longitude = 114.4
+	fmt.Printf("%+v\n", point)
+
 	p1 := Person{"Aaric", 18, 1668744000000}
 	bts, err := json.Marshal(p1)
 	if err != nil {
