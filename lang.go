@@ -47,9 +47,9 @@ func main1(fun string) {
 	case "mapLang":
 		// 10. map
 		mapLang()
-	case "combineLang":
-		// 12. combine
-		combineLang()
+	case "structCombineLang":
+		// 12. struct combine
+		structCombineLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -313,7 +313,7 @@ type report struct {
 	loc
 }
 
-func combineLang() {
+func structCombineLang() {
 	mLoc := loc{30.4, 114.4}
 	myTemp := temp{high: 18.0, low: -4.0}
 	myReport := report{sol: 5, loc: mLoc, temp: myTemp}
