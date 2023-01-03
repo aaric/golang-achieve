@@ -47,6 +47,9 @@ func main1(fun string) {
 	case "mapLang":
 		// 10. map
 		mapLang()
+	case "structCombineLang":
+		// 12. struct combine
+		structCombineLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -283,4 +286,37 @@ func mapLang() {
 	if flags[-5.0] {
 		fmt.Println("it has -5.0 item")
 	}
+}
+
+type temp struct {
+	high, low celsius
+}
+
+func (t temp) avg() celsius {
+	return (t.high + t.low) / 2
+}
+
+type loc struct {
+	lat, long float64
+}
+
+//type report struct {
+//	sol  int
+//	temp temp
+//	loc  loc
+//}
+
+// combine
+type report struct {
+	sol int
+	temp
+	loc
+}
+
+func structCombineLang() {
+	mLoc := loc{30.4, 114.4}
+	myTemp := temp{high: 18.0, low: -4.0}
+	myReport := report{sol: 5, loc: mLoc, temp: myTemp}
+	//fmt.Println("avg temp:", myReport.temp.avg())
+	fmt.Printf("avg temp: %v", myReport.avg())
 }
