@@ -50,6 +50,9 @@ func main1(fun string) {
 	case "structCombineLang":
 		// 12. struct combine
 		structCombineLang()
+	case "structInterfaceLang":
+		// 13. struct interface
+		structInterfaceLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -319,4 +322,45 @@ func structCombineLang() {
 	myReport := report{sol: 5, loc: mLoc, temp: myTemp}
 	//fmt.Println("avg temp:", myReport.temp.avg())
 	fmt.Printf("avg temp: %v", myReport.avg())
+}
+
+type talker interface {
+	talk() string
+}
+
+type cat struct {
+}
+
+func (c cat) talk() string {
+	return "meow"
+}
+
+type dog int
+
+func (d dog) talk() string {
+	return strings.Repeat("bark", int(d))
+}
+
+func speek(t talker) {
+	fmt.Println(t.talk())
+}
+
+type pet struct {
+	talker
+}
+
+func structInterfaceLang() {
+	//var talker interface {
+	//	talk() string
+	//}
+	//talker = cat{}
+	//fmt.Println(talker.talk())
+	//talker = dog(3)
+	//fmt.Println(talker.talk())
+
+	speek(cat{})
+	speek(dog(3))
+
+	p := pet{cat{}}
+	speek(p)
 }
