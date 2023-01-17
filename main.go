@@ -4,7 +4,7 @@ import "time"
 
 func main() {
 	// lang
-	main1("chanLang")
+	main1("lockLang")
 
 	// fyne
 	//main2("themeApp")

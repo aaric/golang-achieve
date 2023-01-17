@@ -12,6 +12,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 	"unicode/utf8"
 )
@@ -75,6 +76,9 @@ func main1(fun string) {
 	case "chanLang":
 		// 19. chan
 		chanLang()
+	case "lockLang":
+		// 20. lock
+		lockLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -565,4 +569,31 @@ func chanLang() {
 	go filter1(c1)
 	go filter2(c1, c2)
 	filter3(c2)
+}
+
+type Visited struct {
+	key     sync.Mutex
+	visited map[string]int
+}
+
+func (v Visited) visit(url string) int {
+	v.key.Lock()
+	defer v.key.Unlock()
+
+	count := v.visited[url]
+	count++
+	v.visited[url] = count
+	return count
+}
+
+func letVisit(i int, v Visited, url string) {
+	count := v.visit(url)
+	fmt.Printf("v-%v visit %v %v times\n", i, url, count)
+}
+
+func lockLang() {
+	v := Visited{visited: make(map[string]int)}
+	for i := 0; i < 100; i++ {
+		go letVisit(i, v, fmt.Sprintf("http://let/%v", rand.Intn(10)))
+	}
 }
