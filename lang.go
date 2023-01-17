@@ -372,4 +372,9 @@ func pointerLang() {
 	age := 18
 	agePtr := &age
 	fmt.Printf("age ptr is %T, the value is %v\n", agePtr, *agePtr)
+
+	str := "aaa"
+	strPtr := &str
+	str = "bbb"
+	fmt.Printf("str = %v, *strPtr = %v", str, *strPtr)
 }
