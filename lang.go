@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"math"
 	"math/big"
+	"math/rand"
 	"os"
 	"sort"
 	"strconv"
@@ -57,14 +58,23 @@ func main1(fun string) {
 		// 13. struct interface
 		structInterfaceLang()
 	case "pointerLang":
-		// 13. pointer
+		// 14. pointer
 		pointerLang()
 	case "nilLang":
-		// 14. nil
+		// 15. nil
 		nilLang()
 	case "errorLang":
-		// 15. error
+		// 16. error
 		errorLang()
+	case "deferLang":
+		// 17. defer
+		deferLang()
+	case "threadLang":
+		// 18. thread
+		threadLang()
+	case "chanLang":
+		// 19. chan
+		chanLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -471,4 +481,88 @@ func errorLang() error {
 	}
 
 	return nil
+}
+
+func deferLang() {
+	defer func() {
+		if e := recover(); e != nil {
+			fmt.Println(e)
+		}
+		fmt.Println("defer block")
+	}()
+
+	panic("let's go")
+}
+
+func sleep1s(i int, c chan int) {
+	time.Sleep(time.Duration(rand.Intn(3)) * time.Second)
+	fmt.Printf("sleep-%v 1s ok\n", i)
+	c <- i
+}
+
+func threadLang() {
+	c := make(chan int)
+	for i := 0; i < 5; i++ {
+		go sleep1s(i, c)
+	}
+
+	timeout := time.After(2 * time.Second)
+	for i := 0; i < 5; i++ {
+		//tId := <-c
+		//fmt.Printf("sleep-%v finished\n", tId)
+
+		select {
+		case tId := <-c:
+			fmt.Printf("sleep-%v finished\n", tId)
+		case <-timeout:
+			fmt.Printf("task timeout\n")
+			return
+		}
+	}
+	fmt.Println("task running...")
+}
+
+func filter1(c chan string) {
+	for _, v := range []string{"Alpha", "Beta", "Gamma", "Delta", "Omicron", "Zeta"} {
+		c <- v
+	}
+	//c <- ""
+	close(c)
+}
+
+func filter2(c1, c2 chan string) {
+	for {
+		//v := <-c1
+		v, ok := <-c1
+		//if v == "" {
+		if !ok {
+			//c2 <- ""
+			close(c2)
+			return
+		}
+		if !strings.Contains(v, "ta") {
+			c2 <- v
+		}
+	}
+}
+
+func filter3(c chan string) {
+	//for {
+	//	v := <-c
+	//	if v == "" {
+	//		return
+	//	}
+	//	fmt.Println(v)
+	//}
+	for v := range c {
+		fmt.Println(v)
+	}
+}
+
+func chanLang() {
+	c1 := make(chan string)
+	c2 := make(chan string)
+	go filter1(c1)
+	go filter2(c1, c2)
+	filter3(c2)
 }
