@@ -3,8 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"math"
 	"math/big"
+	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -59,6 +61,9 @@ func main1(fun string) {
 	case "nilLang":
 		// 14. nil
 		nilLang()
+	case "errorLang":
+		// 15. error
+		errorLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -408,19 +413,19 @@ func tail(strings []string) []string {
 
 func nilLang() {
 	var numPtr *int
-	if nil != numPtr {
+	if numPtr != nil {
 		fmt.Println(*numPtr)
 	}
 	fmt.Println(numPtr)
 	//fmt.Println(*numPtr)
 
 	var fn func(a, b int) int
-	fmt.Println(nil == fn)
+	fmt.Println(fn == nil)
 
 	fmt.Println(tail(nil))
 
 	var virus map[string]int
-	fmt.Println(nil == virus)
+	fmt.Println(virus == nil)
 
 	virus = make(map[string]int)
 	virus["Alpha"] = 2019
@@ -432,5 +437,29 @@ func nilLang() {
 	}
 	for k, v := range virus {
 		fmt.Println(k, v)
+	}
+}
+
+func errorLang() {
+	files, err := ioutil.ReadDir(".")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	for _, file := range files {
+		fmt.Println(file.Name())
+	}
+
+	file, err := os.Create("test.log")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	_, err = fmt.Fprintln(file, "hello world")
+	if err != nil {
+		fmt.Println(err)
+		file.Close()
+		os.Exit(1)
 	}
 }
