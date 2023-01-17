@@ -70,8 +70,11 @@ func main1(fun string) {
 		// 17. defer
 		deferLang()
 	case "threadLang":
-		// 18. threadLang
+		// 18. thread
 		threadLang()
+	case "chanLang":
+		// 18. chan
+		chanLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -517,4 +520,42 @@ func threadLang() {
 		}
 	}
 	fmt.Println("task running...")
+}
+
+func filter1(c chan string) {
+	for _, v := range []string{"Alpha", "Beta", "Gamma", "Delta", "Omicron", "Zeta"} {
+		c <- v
+	}
+	c <- ""
+}
+
+func filter2(c1, c2 chan string) {
+	for {
+		v := <-c1
+		if v == "" {
+			c2 <- ""
+			return
+		}
+		if !strings.Contains(v, "ta") {
+			c2 <- v
+		}
+	}
+}
+
+func filter3(c chan string) {
+	for {
+		v := <-c
+		if v == "" {
+			return
+		}
+		fmt.Println(v)
+	}
+}
+
+func chanLang() {
+	c1 := make(chan string)
+	c2 := make(chan string)
+	go filter1(c1)
+	go filter2(c1, c2)
+	filter3(c2)
 }
