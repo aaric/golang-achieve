@@ -490,14 +490,20 @@ func deferLang() {
 	panic("let's go")
 }
 
-func sleep1s(i int) {
+func sleep1s(i int, c chan int) {
 	time.Sleep(1 * time.Second)
 	fmt.Printf("sleep-%v 1s ok\n", i)
+	c <- i
 }
 
 func threadLang() {
+	c := make(chan int)
 	for i := 0; i < 5; i++ {
-		go sleep1s(i)
+		go sleep1s(i, c)
+	}
+	for i := 0; i < 5; i++ {
+		tId := <-c
+		fmt.Printf("sleep-%v finished\n", tId)
 	}
 	fmt.Println("task running...")
 }
