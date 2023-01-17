@@ -53,6 +53,9 @@ func main1(fun string) {
 	case "structInterfaceLang":
 		// 13. struct interface
 		structInterfaceLang()
+	case "pointerLang":
+		// 13. pointer
+		pointerLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -363,4 +366,10 @@ func structInterfaceLang() {
 
 	p := pet{cat{}}
 	speek(p)
+}
+
+func pointerLang() {
+	age := 18
+	agePtr := &age
+	fmt.Printf("age ptr is %T, the value is %v\n", agePtr, *agePtr)
 }
