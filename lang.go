@@ -341,8 +341,12 @@ func (d dog) talk() string {
 	return strings.Repeat("bark", int(d))
 }
 
-func call(t talker) {
+func speek(t talker) {
 	fmt.Println(t.talk())
+}
+
+type pet struct {
+	talker
 }
 
 func structInterfaceLang() {
@@ -354,6 +358,9 @@ func structInterfaceLang() {
 	//talker = dog(3)
 	//fmt.Println(talker.talk())
 
-	call(cat{})
-	call(dog(3))
+	speek(cat{})
+	speek(dog(3))
+
+	p := pet{cat{}}
+	speek(p)
 }
