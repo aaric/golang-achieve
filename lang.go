@@ -324,10 +324,6 @@ func structCombineLang() {
 	fmt.Printf("avg temp: %v", myReport.avg())
 }
 
-var animal interface {
-	talk() string
-}
-
 type cat struct {
 }
 
@@ -342,6 +338,9 @@ func (d dog) talk() string {
 }
 
 func structInterfaceLang() {
+	var animal interface {
+		talk() string
+	}
 	animal = cat{}
 	fmt.Println(animal.talk())
 	animal = dog(3)
