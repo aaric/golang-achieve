@@ -338,11 +338,11 @@ func (d dog) talk() string {
 }
 
 func structInterfaceLang() {
-	var animal interface {
+	var talker interface {
 		talk() string
 	}
-	animal = cat{}
-	fmt.Println(animal.talk())
-	animal = dog(3)
-	fmt.Println(animal.talk())
+	talker = cat{}
+	fmt.Println(talker.talk())
+	talker = dog(3)
+	fmt.Println(talker.talk())
 }
