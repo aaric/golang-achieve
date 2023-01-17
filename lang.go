@@ -56,6 +56,9 @@ func main1(fun string) {
 	case "pointerLang":
 		// 13. pointer
 		pointerLang()
+	case "nilLang":
+		// 14. nil
+		nilLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -397,4 +400,37 @@ func pointerLang() {
 	virusPtr := &[3]string{"Alpha", "Beta", "Gamma"}
 	fmt.Println(virusPtr[0])
 	fmt.Println(virusPtr[1:2])
+}
+
+func tail(strings []string) []string {
+	return append(strings, "Alpha", "Beta", "Gamma")
+}
+
+func nilLang() {
+	var numPtr *int
+	if nil != numPtr {
+		fmt.Println(*numPtr)
+	}
+	fmt.Println(numPtr)
+	//fmt.Println(*numPtr)
+
+	var fn func(a, b int) int
+	fmt.Println(nil == fn)
+
+	fmt.Println(tail(nil))
+
+	var virus map[string]int
+	fmt.Println(nil == virus)
+
+	virus = make(map[string]int)
+	virus["Alpha"] = 2019
+	virus["Beta"] = 2020
+	virus["Gamma"] = 2021
+	v, ok := virus["Delta"]
+	if ok {
+		fmt.Println(v)
+	}
+	for k, v := range virus {
+		fmt.Println(k, v)
+	}
 }
