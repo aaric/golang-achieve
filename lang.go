@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"math"
@@ -440,7 +441,7 @@ func nilLang() {
 	}
 }
 
-func errorLang() {
+func errorLang() error {
 	files, err := ioutil.ReadDir(".")
 	if err != nil {
 		fmt.Println(err)
@@ -462,4 +463,12 @@ func errorLang() {
 		file.Close()
 		os.Exit(1)
 	}
+
+	var ErrCustom = errors.New("custom error")
+	if file != nil {
+		fmt.Println("custom error")
+		return ErrCustom
+	}
+
+	return nil
 }
