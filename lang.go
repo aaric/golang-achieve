@@ -73,7 +73,7 @@ func main1(fun string) {
 		// 18. thread
 		threadLang()
 	case "chanLang":
-		// 18. chan
+		// 19. chan
 		chanLang()
 	default:
 		fmt.Println("not match")
@@ -526,14 +526,18 @@ func filter1(c chan string) {
 	for _, v := range []string{"Alpha", "Beta", "Gamma", "Delta", "Omicron", "Zeta"} {
 		c <- v
 	}
-	c <- ""
+	//c <- ""
+	close(c)
 }
 
 func filter2(c1, c2 chan string) {
 	for {
-		v := <-c1
-		if v == "" {
-			c2 <- ""
+		//v := <-c1
+		v, ok := <-c1
+		//if v == "" {
+		if !ok {
+			//c2 <- ""
+			close(c2)
 			return
 		}
 		if !strings.Contains(v, "ta") {
@@ -543,11 +547,14 @@ func filter2(c1, c2 chan string) {
 }
 
 func filter3(c chan string) {
-	for {
-		v := <-c
-		if v == "" {
-			return
-		}
+	//for {
+	//	v := <-c
+	//	if v == "" {
+	//		return
+	//	}
+	//	fmt.Println(v)
+	//}
+	for v := range c {
 		fmt.Println(v)
 	}
 }
