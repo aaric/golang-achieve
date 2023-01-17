@@ -368,7 +368,8 @@ func structInterfaceLang() {
 	speek(p)
 }
 
-func birthday(p *Person) {
+//func birthday(p *Person) {
+func (p *Person) birthday() {
 	p.Age++
 }
 
@@ -389,7 +390,8 @@ func pointerLang() {
 	}
 	(*p).Name = "lisi"
 	p.Name = "wangwu"
-	birthday(p)
+	//birthday(p)
+	p.birthday()
 	fmt.Printf("%+v\n", p)
 
 	virusPtr := &[3]string{"Alpha", "Beta", "Gamma"}
