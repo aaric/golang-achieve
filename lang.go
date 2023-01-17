@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"math"
 	"math/big"
+	"math/rand"
 	"os"
 	"sort"
 	"strconv"
@@ -491,7 +492,7 @@ func deferLang() {
 }
 
 func sleep1s(i int, c chan int) {
-	time.Sleep(1 * time.Second)
+	time.Sleep(time.Duration(rand.Intn(3)) * time.Second)
 	fmt.Printf("sleep-%v 1s ok\n", i)
 	c <- i
 }
@@ -501,9 +502,19 @@ func threadLang() {
 	for i := 0; i < 5; i++ {
 		go sleep1s(i, c)
 	}
+
+	timeout := time.After(2 * time.Second)
 	for i := 0; i < 5; i++ {
-		tId := <-c
-		fmt.Printf("sleep-%v finished\n", tId)
+		//tId := <-c
+		//fmt.Printf("sleep-%v finished\n", tId)
+
+		select {
+		case tId := <-c:
+			fmt.Printf("sleep-%v finished\n", tId)
+		case <-timeout:
+			fmt.Printf("task timeout\n")
+			return
+		}
 	}
 	fmt.Println("task running...")
 }
