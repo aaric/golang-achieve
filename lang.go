@@ -57,14 +57,20 @@ func main1(fun string) {
 		// 13. struct interface
 		structInterfaceLang()
 	case "pointerLang":
-		// 13. pointer
+		// 14. pointer
 		pointerLang()
 	case "nilLang":
-		// 14. nil
+		// 15. nil
 		nilLang()
 	case "errorLang":
-		// 15. error
+		// 16. error
 		errorLang()
+	case "deferLang":
+		// 17. defer
+		deferLang()
+	case "threadLang":
+		// 18. threadLang
+		threadLang()
 	default:
 		fmt.Println("not match")
 	}
@@ -471,4 +477,27 @@ func errorLang() error {
 	}
 
 	return nil
+}
+
+func deferLang() {
+	defer func() {
+		if e := recover(); e != nil {
+			fmt.Println(e)
+		}
+		fmt.Println("defer block")
+	}()
+
+	panic("let's go")
+}
+
+func sleep1s(i int) {
+	time.Sleep(1 * time.Second)
+	fmt.Printf("sleep-%v 1s ok\n", i)
+}
+
+func threadLang() {
+	for i := 0; i < 5; i++ {
+		go sleep1s(i)
+	}
+	fmt.Println("task running...")
 }
