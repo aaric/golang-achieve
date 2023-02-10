@@ -44,4 +44,9 @@ go run fyne.go
 go install fyne.io/fyne/v2/cmd/fyne@latest
 #fyne package --name fyne --icon Icon.png --appVersion 0.1.0 fyne.go
 fyne package --name fyne --appVersion 0.1.0 fyne.go
+
+# font
+# use windows cmd, not powershell
+fyne bundle --package theme --name ResourceMsyhTtf msyh.ttf >> bundle.go
+fyne bundle --append --package theme --name ResourceMsyhbdTtf msyhbd.ttf >> bundle.go
 ```

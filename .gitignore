@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+theme/bundle.go
 
 # Test binary, built with `go test -c`
 *.test
