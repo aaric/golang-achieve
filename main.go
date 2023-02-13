@@ -10,5 +10,5 @@ func main() {
 	//main2("themeApp")
 
 	// fyne aoo
-	main3("采集程序")
+	main3("简单登录界面")
 }

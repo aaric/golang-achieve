@@ -49,4 +49,5 @@ fyne package --name fyne --appVersion 0.1.0 fyne.go
 # use windows cmd, not powershell
 fyne bundle --package theme --name ResourceMsyhTtf msyh.ttf >> bundle.go
 fyne bundle --append --package theme --name ResourceMsyhbdTtf msyhbd.ttf >> bundle.go
+fyne bundle --append --package theme --name ResourceIconPng Icon.png >> bundle.go
 ```

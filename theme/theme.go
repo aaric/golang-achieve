@@ -29,6 +29,7 @@ func (*MyTheme) Color(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Color {
 }
 
 func (*MyTheme) Icon(n fyne.ThemeIconName) fyne.Resource {
+	//return ResourceIconPng
 	return theme.DefaultTheme().Icon(n)
 }
 
